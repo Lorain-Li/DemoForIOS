@@ -13,6 +13,8 @@
 {
     UITableView* _tabView;
     BOOL _isEdit;
+    NSMutableArray* _tabData;
+    UIBarButtonItem* _myButton;
 }
 
 @end
