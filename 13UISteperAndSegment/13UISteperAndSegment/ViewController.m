@@ -26,7 +26,6 @@
     _mySteper.continuous = YES;             //连续响应事件
     [_mySteper addTarget:self action:@selector(steperChange:) forControlEvents:UIControlEventValueChanged];
     
-    
     UISegmentedControl* _mySegment = [[UISegmentedControl alloc] initWithFrame:CGRectMake(10, 200, 300, 50)];
     [_mySegment insertSegmentWithTitle:@"$0" atIndex:0 animated:YES];
     [_mySegment insertSegmentWithTitle:@"$5" atIndex:1 animated:YES];
