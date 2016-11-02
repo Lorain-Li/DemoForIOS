@@ -24,7 +24,10 @@
     _blelist.delegate = self;
     _blelist.dataSource = self;
     [self.view addSubview:_blelist];
-    
+    _bleC = [[CBCentralManager alloc] init];
+    _bleC.delegate = self;
+    UIBarButtonItem* _blebtn = [[UIBarButtonItem alloc] initWithTitle:@"start" style:UIBarButtonItemStylePlain target:self action:@selector(pressbtn:)];
+    self.navigationItem.rightBarButtonItem = _blebtn;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -79,8 +82,27 @@
 //扫描到设备会进入方法
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
     NSLog(@"扫描连接外设：%@ %@",peripheral.name,RSSI);
-    [_blearry addObject:peripheral.name];
-    [_blelist reloadData];
+    NSLog(@"%@",advertisementData);
+
+    if (peripheral.name!=nil) {
+        [_blearry addObject:peripheral.name];
+        [_blelist reloadData];
+    }
+}
+
+-(void)pressbtn:(UIBarButtonItem*)btn
+{
+    if ([btn.title  isEqual: @"start"]) {
+        [_bleC scanForPeripheralsWithServices:nil options:nil];
+        btn.title = @"stop";
+        self.title = @"正在扫描蓝牙设备";
+    }
+    else
+    {
+        [_bleC stopScan];
+        btn.title = @"start";
+        self.title = @"已停止扫描";
+    }
 }
 
 @end

@@ -15,6 +15,7 @@
     CGFloat _scX,_scY;
     NSMutableArray* _blearry;
     UITableView* _blelist;
+    CBCentralManager* _bleC;
 }
 
 @end
